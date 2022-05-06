@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../res/colors.dart';
+import '../utils/colors.dart';
 
 class Decorations {
   static InputDecoration getTextFieldDecoration() => const InputDecoration(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fnote_app/res/colors.dart';
+import 'package:fnote_app/utils/colors.dart';
 
 //** Note list design
 class NoteList extends StatefulWidget {

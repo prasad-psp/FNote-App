@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../res/colors.dart';
+import '../utils/colors.dart';
 
 class AppTitle extends StatelessWidget {
   final String title, subtitle;

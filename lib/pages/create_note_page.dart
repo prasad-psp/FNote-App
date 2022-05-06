@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fnote_app/res/colors.dart';
+import 'package:fnote_app/utils/colors.dart';
 import 'package:fnote_app/widgets/app_title.dart';
 import 'package:fnote_app/widgets/decorations.dart';
 
