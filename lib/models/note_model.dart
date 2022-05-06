@@ -32,13 +32,12 @@ class NoteModel {
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
-  
-    result.addAll({'id': id});
+
     result.addAll({'title': title});
     result.addAll({'description': description});
     result.addAll({'date': date});
     result.addAll({'time': time});
-  
+
     return result;
   }
 
@@ -54,7 +53,8 @@ class NoteModel {
 
   String toJson() => json.encode(toMap());
 
-  factory NoteModel.fromJson(String source) => NoteModel.fromMap(json.decode(source));
+  factory NoteModel.fromJson(String source) =>
+      NoteModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -64,21 +64,21 @@ class NoteModel {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is NoteModel &&
-      other.id == id &&
-      other.title == title &&
-      other.description == description &&
-      other.date == date &&
-      other.time == time;
+        other.id == id &&
+        other.title == title &&
+        other.description == description &&
+        other.date == date &&
+        other.time == time;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      title.hashCode ^
-      description.hashCode ^
-      date.hashCode ^
-      time.hashCode;
+        title.hashCode ^
+        description.hashCode ^
+        date.hashCode ^
+        time.hashCode;
   }
 }
