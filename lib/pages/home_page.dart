@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fnote_app/res/colors.dart';
+import 'package:fnote_app/widgets/app_title.dart';
 import 'package:fnote_app/widgets/note_list.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,19 +22,7 @@ class HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
-                Text(
-                  "Note App",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colorr.amber),
-                  textScaleFactor: 2.0,
-                ),
-                SizedBox(height: 5.0),
-                Text(
-                  "Note list",
-                  style: TextStyle(
-                      color: Colorr.lightPurple, fontWeight: FontWeight.w500),
-                  textScaleFactor: 1.5,
-                ),
+                AppTitle(title: "Note App", subtitle: "Note list"),
                 SizedBox(height: 20.0),
                 NoteList(),
               ]),
