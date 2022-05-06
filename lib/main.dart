@@ -14,9 +14,19 @@ class MyApp extends StatelessWidget {
       title: "FNote App",
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.initialRoute,
-      routes: {
-        AppRoutes.initialRoute: (context) => const HomePage(),
-        AppRoutes.createNoteRoute: (context) => const CreateNotePage(),
+      onGenerateRoute: (setting) {
+        switch (setting.name) {
+          case AppRoutes.initialRoute:
+            {
+              return MaterialPageRoute(builder: (context) => const HomePage());
+            }
+          case AppRoutes.createNoteRoute:
+            {
+              return MaterialPageRoute(
+                  builder: (context) => CreateNotePage(
+                      arguments: setting.arguments as Map<String, String>));
+            }
+        }
       },
     );
   }
