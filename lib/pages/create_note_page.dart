@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fnote_app/db/note_db.dart';
+import 'package:fnote_app/models/note_model.dart';
 import 'package:fnote_app/utils/colors.dart';
+import 'package:fnote_app/utils/date_time.dart';
 import 'package:fnote_app/widgets/app_title.dart';
 import 'package:fnote_app/widgets/decorations.dart';
 
@@ -13,6 +16,15 @@ class CreateNotePage extends StatefulWidget {
 }
 
 class _CreateNotePageState extends State<CreateNotePage> {
+  final _titleController = TextEditingController();
+  final _descrController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   void dispose() {
     // **save data into database
@@ -23,6 +35,8 @@ class _CreateNotePageState extends State<CreateNotePage> {
   Widget build(BuildContext context) {
     final title = widget.arguments['title'].toString();
     final description = widget.arguments['description'].toString();
+    _titleController.text = title;
+    _descrController.text = description;
 
     return Scaffold(
         backgroundColor: Colorr.backgroundColor,
@@ -43,7 +57,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
                 ),
                 const SizedBox(height: 5.0),
                 TextField(
-                  controller: TextEditingController(text: title),
+                  controller: _titleController,
                   style: const TextStyle(color: Colors.white),
                   decoration: Decorations.getTextFieldDecoration(),
                 ),
@@ -57,7 +71,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
                 const SizedBox(height: 5.0),
                 Expanded(
                   child: TextField(
-                    controller: TextEditingController(text: description),
+                    controller: _descrController,
                     textAlignVertical: TextAlignVertical.top,
                     style: const TextStyle(color: Colors.white),
                     maxLines: null,
