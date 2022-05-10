@@ -24,7 +24,7 @@ class NoteProvider with ChangeNotifier {
   }
 
   void insert(NoteModel model, bool isDuplicate) async {
-    var noteId = await noteDatabase?.insert(model);
+    var noteId = await noteDatabase?.insert(model,isDuplicate);
     if (noteId != 0) {
       read();
     }

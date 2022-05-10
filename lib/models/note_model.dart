@@ -41,6 +41,17 @@ class NoteModel {
     return result;
   }
 
+  Map<String, dynamic> toMapDuplicateRecord() {
+    final result = <String, dynamic>{};
+    result.addAll({'id': id});
+    result.addAll({'title': title});
+    result.addAll({'description': description});
+    result.addAll({'date': date});
+    result.addAll({'time': time});
+
+    return result;
+  }
+
   factory NoteModel.fromMap(Map<String, dynamic> map) {
     return NoteModel(
       id: map['id']?.toInt() ?? 0,

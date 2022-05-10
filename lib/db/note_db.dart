@@ -33,11 +33,11 @@ class NoteDatabase {
         ''');
   }
 
-  Future<int> insert(NoteModel model) async {
+  Future<int> insert(NoteModel model, bool isDuplicate) async {
     var dbClient = await db;
     return await dbClient!.insert(
       'note',
-      model.toMap(),
+      isDuplicate? model.toMapDuplicateRecord() : model.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
