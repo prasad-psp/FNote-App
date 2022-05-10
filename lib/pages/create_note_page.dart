@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:fnote_app/db/note_db.dart';
 import 'package:fnote_app/models/note_model.dart';
 import 'package:fnote_app/utils/colors.dart';
-import 'package:fnote_app/utils/date_time.dart';
 import 'package:fnote_app/widgets/app_title.dart';
 import 'package:fnote_app/widgets/decorations.dart';
 
 class CreateNotePage extends StatefulWidget {
-  final Map<String, String> arguments;
+  final Map<String, NoteModel?> arguments;
 
   const CreateNotePage({Key? key, required this.arguments}) : super(key: key);
 
@@ -21,7 +19,6 @@ class _CreateNotePageState extends State<CreateNotePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -33,10 +30,11 @@ class _CreateNotePageState extends State<CreateNotePage> {
 
   @override
   Widget build(BuildContext context) {
-    final title = widget.arguments['title'].toString();
-    final description = widget.arguments['description'].toString();
-    _titleController.text = title;
-    _descrController.text = description;
+    NoteModel? model = widget.arguments['model'];
+    if (model != null) {
+      _titleController.text = model.title;
+      _descrController.text = model.description;
+    }
 
     return Scaffold(
         backgroundColor: Colorr.backgroundColor,

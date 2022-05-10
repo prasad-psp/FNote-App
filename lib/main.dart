@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fnote_app/models/note_model.dart';
 import 'package:fnote_app/pages/create_note_page.dart';
 import 'package:fnote_app/pages/home_page.dart';
 import 'package:fnote_app/routes/app_routes.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
             {
               return MaterialPageRoute(
                   builder: (context) => CreateNotePage(
-                      arguments: setting.arguments as Map<String, String>));
+                      arguments: setting.arguments as Map<String, NoteModel?>));
             }
         }
       },
