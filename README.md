@@ -1,6 +1,6 @@
 # FNote App
 
-Simple Flutter Note Application using sqflite & provider package. Please check out the screenshots!
+Simple Flutter Note Application using **sqflite** & **provider** package. Please check out the screenshots!
 
 
 ## Screen shots
