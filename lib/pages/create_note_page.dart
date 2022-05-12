@@ -99,16 +99,18 @@ class _CreateNotePageState extends State<CreateNotePage> {
 
     if (_title.isNotEmpty) {
       if (model != null) {
-        // **Duplicate record
-        noteProvider.insert(
-            NoteModel(
-              id: model.id,
-              title: _title,
-              description: _desc,
-              date: _date,
-              time: _time,
-            ),
-            true);
+        if (model.title != _title || model.description != _desc) {
+          // **Duplicate record
+          noteProvider.insert(
+              NoteModel(
+                id: model.id,
+                title: _title,
+                description: _desc,
+                date: _date,
+                time: _time,
+              ),
+              true);
+        }
       } else {
         // **New record
         noteProvider.insert(
