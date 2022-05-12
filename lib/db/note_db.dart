@@ -37,7 +37,7 @@ class NoteDatabase {
     var dbClient = await db;
     return await dbClient!.insert(
       'note',
-      isDuplicate? model.toMapDuplicateRecord() : model.toMap(),
+      isDuplicate ? model.toMapDuplicateRecord() : model.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
@@ -46,7 +46,7 @@ class NoteDatabase {
     var dbClient = await db;
     List<Map<String, Object?>> mapList =
         await dbClient!.query('note', orderBy: "id desc");
-    if (mapList.isEmpty) {
+    if (mapList.isNotEmpty) {
       return mapList.map((map) => NoteModel.fromMap(map)).toList();
     }
     return null;
