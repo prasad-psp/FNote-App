@@ -4,6 +4,7 @@ import 'package:fnote_app/provider/note_provider.dart';
 import 'package:fnote_app/utils/colors.dart';
 import 'package:provider/provider.dart';
 import '../routes/app_routes.dart';
+import 'delete_alert.dart';
 
 //** Note list design
 class NoteList extends StatefulWidget {
@@ -64,7 +65,11 @@ class NoteListItem extends StatelessWidget {
             icon: const Icon(Icons.remove_circle_outline),
             color: Colors.white30,
             onPressed: () {
-              Provider.of<NoteProvider>(context,listen: false).delete(model);
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return deleteDialog(context, model);
+                  });
             },
           ),
         ),
