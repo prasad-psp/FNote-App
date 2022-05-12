@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fnote_app/models/note_model.dart';
+import 'package:fnote_app/provider/note_provider.dart';
 import 'package:fnote_app/utils/colors.dart';
+import 'package:fnote_app/utils/date_time.dart';
 import 'package:fnote_app/widgets/app_title.dart';
 import 'package:fnote_app/widgets/decorations.dart';
+import 'package:provider/provider.dart';
 
 class CreateNotePage extends StatefulWidget {
   final Map<String, NoteModel?> arguments;
@@ -17,14 +20,18 @@ class _CreateNotePageState extends State<CreateNotePage> {
   final _titleController = TextEditingController();
   final _descrController = TextEditingController();
 
+  late NoteProvider noteProvider;
+
   @override
   void initState() {
     super.initState();
+    noteProvider = Provider.of<NoteProvider>(context, listen: false);
   }
 
   @override
   void dispose() {
     // **save data into database
+    _saveData();
     super.dispose();
   }
 
@@ -81,5 +88,41 @@ class _CreateNotePageState extends State<CreateNotePage> {
             ),
           ),
         ));
+  }
+
+  void _saveData() {
+    NoteModel? model = widget.arguments['model'];
+    var _title = _titleController.text;
+    var _desc = _descrController.text;
+    var _date = DateTimeHandler.date;
+    var _time = DateTimeHandler.time;
+
+    if (_title.isNotEmpty) {
+      if (model != null) {
+        // **Duplicate record
+        noteProvider.insert(
+            NoteModel(
+              id: model.id,
+              title: _title,
+              description: _desc,
+              date: _date,
+              time: _time,
+            ),
+            true);
+      } else {
+        // **New record
+        noteProvider.insert(
+            NoteModel(
+                id: 0,
+                title: _title,
+                description: _desc,
+                date: _date,
+                time: _time),
+            false);
+      }
+    }
+
+    _titleController.dispose();
+    _descrController.dispose();
   }
 }

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fnote_app/models/note_model.dart';
+import 'package:fnote_app/provider/note_provider.dart';
 import 'package:fnote_app/utils/colors.dart';
+import 'package:provider/provider.dart';
+
+import '../routes/app_routes.dart';
 
 //** Note list design
 class NoteList extends StatefulWidget {
@@ -11,49 +16,57 @@ class NoteList extends StatefulWidget {
 
 class _NoteListState extends State<NoteList> {
   @override
+  void initState() {
+    super.initState();
+    Provider.of<NoteProvider>(context, listen: false).init();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: ListView.builder(
-      shrinkWrap: true,
-      itemCount: 20,
-      itemBuilder: (context, index) {
-        return NoteListItem(index: index);
-      },
-    ));
+    return Consumer<NoteProvider>(builder: (context, provider, child) {
+      return Expanded(
+          child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: provider.modelList != null ? provider.modelList?.length : 0,
+        itemBuilder: (context, index) {
+          return NoteListItem(model: provider.modelList?.elementAt(index));
+        },
+      ));
+    });
   }
 }
 
 // ** Note list item design
 class NoteListItem extends StatelessWidget {
-  final int index;
-  const NoteListItem({Key? key, required this.index}) : super(key: key);
+  final NoteModel? model;
+  const NoteListItem({Key? key, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Item clicked ${index.toString()}")));
+        Navigator.pushNamed(context, AppRoutes.createNoteRoute,
+              arguments: {"model": model});
       },
       child: Container(
         margin: const EdgeInsets.all(10.0),
         color: Colorr.lightGrey,
         child: ListTile(
           leading: const Icon(Icons.note_alt_outlined, color: Colors.white30),
-          title: const Text(
-            "hello",
-            style: TextStyle(color: Colors.white),
+          title: Text(
+            "${model?.title}",
+            style: const TextStyle(color: Colors.white),
           ),
-          subtitle: const Text(
-            "20-20-222 10:10:10",
-            style: TextStyle(color: Colors.white),
+          subtitle: Text(
+            "${model?.date} ${model?.time}",
+            style: const TextStyle(color: Colors.white),
           ),
           trailing: IconButton(
             icon: const Icon(Icons.remove_circle_outline),
             color: Colors.white30,
             onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text("Remove clicked ${index.toString()}")));
+              // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              //     content: Text("Remove clicked ${index.toString()}")));
             },
           ),
         ),

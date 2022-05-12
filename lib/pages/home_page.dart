@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fnote_app/routes/app_routes.dart';
 import 'package:fnote_app/utils/colors.dart';
 import 'package:fnote_app/widgets/app_title.dart';
 import 'package:fnote_app/widgets/note_list.dart';
@@ -31,7 +32,10 @@ class HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colorr.amber,
         foregroundColor: Colors.black,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, AppRoutes.createNoteRoute,
+              arguments: {"model": null});
+        },
         child: const Icon(Icons.add),
       ),
     );
