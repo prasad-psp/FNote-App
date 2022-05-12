@@ -29,4 +29,11 @@ class NoteProvider with ChangeNotifier {
       read();
     }
   }
+
+  void delete(NoteModel model) async {
+    var result = await noteDatabase.delete(model);
+    if (result != 0) {
+      read();
+    }
+  }
 }

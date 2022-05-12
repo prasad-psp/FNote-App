@@ -64,8 +64,7 @@ class NoteListItem extends StatelessWidget {
             icon: const Icon(Icons.remove_circle_outline),
             color: Colors.white30,
             onPressed: () {
-              // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              //     content: Text("Remove clicked ${index.toString()}")));
+              Provider.of<NoteProvider>(context,listen: false).delete(model);
             },
           ),
         ),

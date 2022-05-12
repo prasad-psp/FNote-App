@@ -51,4 +51,9 @@ class NoteDatabase {
     }
     return [];
   }
+
+  Future<int> delete(NoteModel model) async {
+    var dbClient = await db;
+    return await dbClient!.rawDelete('DELETE FROM note WHERE id = ?', [model.id]);
+  }
 }
