@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fnote_app/db/note_db.dart';
-
 import '../models/note_model.dart';
 
 class NoteProvider with ChangeNotifier {
-  NoteDatabase? noteDatabase;
+  late NoteDatabase noteDatabase;
 
-  List<NoteModel>? modelList;
+  List<NoteModel> modelList = [];
 
   void init() {
     noteDatabase = NoteDatabase();
@@ -14,17 +13,18 @@ class NoteProvider with ChangeNotifier {
   }
 
   void read() async {
-    List<NoteModel>? tempList = await noteDatabase?.read();
-    if (tempList != null) {
-      if (tempList.isNotEmpty) {
-        modelList = tempList;
-        notifyListeners();
+    List<NoteModel> tempList = await noteDatabase.read();
+    if (tempList.isNotEmpty) {
+      if (modelList.isNotEmpty) {
+        modelList.clear();
       }
+      modelList.addAll(tempList);
+      notifyListeners();
     }
   }
 
   void insert(NoteModel model, bool isDuplicate) async {
-    var noteId = await noteDatabase?.insert(model,isDuplicate);
+    var noteId = await noteDatabase.insert(model, isDuplicate);
     if (noteId != 0) {
       read();
     }

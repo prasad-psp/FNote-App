@@ -42,13 +42,13 @@ class NoteDatabase {
     );
   }
 
-  Future<List<NoteModel>?> read() async {
+  Future<List<NoteModel>> read() async {
     var dbClient = await db;
     List<Map<String, Object?>> mapList =
         await dbClient!.query('note', orderBy: "id desc");
     if (mapList.isNotEmpty) {
       return mapList.map((map) => NoteModel.fromMap(map)).toList();
     }
-    return null;
+    return [];
   }
 }

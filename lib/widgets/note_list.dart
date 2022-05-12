@@ -3,7 +3,6 @@ import 'package:fnote_app/models/note_model.dart';
 import 'package:fnote_app/provider/note_provider.dart';
 import 'package:fnote_app/utils/colors.dart';
 import 'package:provider/provider.dart';
-
 import '../routes/app_routes.dart';
 
 //** Note list design
@@ -27,9 +26,9 @@ class _NoteListState extends State<NoteList> {
       return Expanded(
           child: ListView.builder(
         shrinkWrap: true,
-        itemCount: provider.modelList != null ? provider.modelList?.length : 0,
+        itemCount: provider.modelList.length,
         itemBuilder: (context, index) {
-          return NoteListItem(model: provider.modelList?.elementAt(index));
+          return NoteListItem(model: provider.modelList.elementAt(index));
         },
       ));
     });
@@ -38,7 +37,7 @@ class _NoteListState extends State<NoteList> {
 
 // ** Note list item design
 class NoteListItem extends StatelessWidget {
-  final NoteModel? model;
+  final NoteModel model;
   const NoteListItem({Key? key, required this.model}) : super(key: key);
 
   @override
@@ -46,7 +45,7 @@ class NoteListItem extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, AppRoutes.createNoteRoute,
-              arguments: {"model": model});
+            arguments: {"model": model});
       },
       child: Container(
         margin: const EdgeInsets.all(10.0),
@@ -54,11 +53,11 @@ class NoteListItem extends StatelessWidget {
         child: ListTile(
           leading: const Icon(Icons.note_alt_outlined, color: Colors.white30),
           title: Text(
-            "${model?.title}",
+            model.title,
             style: const TextStyle(color: Colors.white),
           ),
           subtitle: Text(
-            "${model?.date} ${model?.time}",
+            "${model.date} ${model.time}",
             style: const TextStyle(color: Colors.white),
           ),
           trailing: IconButton(
