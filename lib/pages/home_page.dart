@@ -23,7 +23,7 @@ class HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
-                AppTitle(title: "Note App", subtitle: "Note list"),
+                AppTitle(title: "FNote App", subtitle: "Note list"),
                 SizedBox(height: 20.0),
                 NoteList(),
               ]),

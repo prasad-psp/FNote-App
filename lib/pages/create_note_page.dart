@@ -52,7 +52,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const AppTitle(title: "Note app", subtitle: "Create note"),
+                const AppTitle(title: "FNote app", subtitle: "Create note"),
                 const SizedBox(height: 30.0),
                 const Text(
                   "Title",
